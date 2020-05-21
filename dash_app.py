@@ -66,16 +66,31 @@ app.layout = html.Div([
     # Title - Row
     html.Div(
         [
-            html.H1(
-                'Customer Issue Prediction App',
-                style={'font-family': 'Helvetica',
-                       "margin-left": "20",
-                       "margin-bottom": "0"},
-                className='eight columns',
-            )
-        ],
-        className='row'
-    ),
+        html.Div(
+            [
+                html.H1(
+                    'Customer Issue Prediction App',
+                    style={'font-family': 'Helvetica',
+                           "margin-left": "20",
+                           "margin-bottom": "0"},
+                    className='eight columns',
+                )
+            ],
+            className='row'
+        ),
+        html.Div(
+            [
+                html.H4(
+                    '--Developed by Alisa Ai--',
+                    style={'font-family': 'Helvetica',
+                           "margin-left": "10",
+                           "margin-bottom": "0"},
+                    className='three columns',
+                )
+            ],
+            className='row'
+        )
+    ]),
 
     #block 2
     html.Div([
@@ -106,26 +121,6 @@ app.layout = html.Div([
                                     {'label': 'Student loan', 'value': 10},
                                     {'label': 'Vehicle loan or lease', 'value': 11}],
                                 placeholder="Select Your Product",
-                                style=dict(width='300px', height='40px', display='inline-block', verticalAlign="middle"))],
-                        className='three columns',
-                        style={"height": "auto", "width": "2000px", "margin-bottom": "auto"}
-                        ),
-                html.Div(
-                    [
-                        html.P('Select Your Company:'),
-                        dcc.Dropdown(
-                                id = 'company', options=[
-                                    {'label': 'CAPITAL ONE', 'value': 12},
-                                    {'label': 'CITIBANK', 'value': 13},
-                                    {'label': 'EQUIFAX', 'value': 14},
-                                    {'label': 'Experian Information Solutions', 'value': 15},
-                                    {'label': 'JPMORGAN CHASE & CO.', 'value': 16},
-                                    {'label': 'Navient Solutions', 'value': 17},
-                                    {'label': 'SYNCHRONY FINANCIAL', 'value': 18},
-                                    {'label': 'TRANSUNION INTERMEDIATE HOLDINGS', 'value': 19},
-                                    {'label': 'WELLS FARGO & COMPANY', 'value': 20},
-                                    {'label': 'Other', 'value': 21}],
-                                placeholder="Select Your Company",
                                 style=dict(width='300px', height='40px', display='inline-block', verticalAlign="middle"))],
                         className='three columns',
                         style={"height": "auto", "width": "2000px", "margin-bottom": "auto"}
@@ -166,11 +161,10 @@ app.layout = html.Div([
     Output(component_id='result', component_property='children'),
     [Input(component_id='complaints-text', component_property='value'),
     Input(component_id='product', component_property='value'),
-    Input(component_id='company', component_property='value'),
     Input(component_id='state', component_property='value'),
     Input('button_1', 'n_clicks')]
 )
-def update_issue(complaints, pro, comp, stat, n_clicks):
+def update_issue(complaints, pro, stat, n_clicks):
     if n_clicks is not None:
         if complaints is not None and complaints is not '':
             try:
@@ -199,31 +193,19 @@ def update_issue(complaints, pro, comp, stat, n_clicks):
                 'Product_Payday loan, title loan, or personal loan': 9,
                 'Product_Student loan': 10,
                 'Product_Vehicle loan or lease': 11,
-                'Company_CAPITAL ONE FINANCIAL CORPORATION': 12,
-                'Company_CITIBANK, N.A.': 13,
-                'Company_EQUIFAX, INC.': 14,
-                'Company_Experian Information Solutions Inc.': 15,
-                'Company_JPMORGAN CHASE & CO.': 16,
-                'Company_Navient Solutions, LLC.': 17,
-                'Company_SYNCHRONY FINANCIAL': 18,
-                'Company_TRANSUNION INTERMEDIATE HOLDINGS, INC.': 19,
-                'Company_WELLS FARGO & COMPANY': 20,
-                'Company_Other': 21,
-                'State_FL': 22,
-                'State_GA': 23,
-                'State_IL': 24,
-                'State_NC': 25,
-                'State_NJ': 26,
-                'State_NY': 27,
-                'State_OH': 28,
-                'State_PA': 29,
-                'State_TX': 30,
-                'State_Other': 31}
-                def dummy(index_dict, pro, comp, stat):
+                'State_FL': 12,
+                'State_GA': 13,
+                'State_IL': 14,
+                'State_NC': 15,
+                'State_NJ': 16,
+                'State_NY': 17,
+                'State_OH': 18,
+                'State_PA': 19,
+                'State_TX': 20,
+                'State_Other': 21}
+                def dummy(index_dict, pro, stat):
                     for key, value in index_dict.items():  # for name, age in dictionary.iteritems():  (for Python 2.x)
                         if pro == value:
-                            index_dict[key] = 100
-                        if comp == value:
                             index_dict[key] = 100
                         if stat == value:
                             index_dict[key] = 100
@@ -234,17 +216,17 @@ def update_issue(complaints, pro, comp, stat, n_clicks):
                             index_dict[key] = 1
                     return index_dict
 
-                attribute_index = dummy(index_dict=index_dict, pro=pro, comp=comp, stat=stat)
+                attribute_index = dummy(index_dict=index_dict, pro=pro, stat=stat)
                 attribute_index['positive_score'] = pos
                 attribute_index['negative_score'] = neg
                 attribute_index['clean_sentences'] = 'text2'
                 input_data = pd.DataFrame(attribute_index, index=[0])
                 issue = model.predict(input_data)[0]
-                return 'Are you facing with this issue: {}?'.format(str(issue))
+                return 'Guess you facing with this issue: {}. Our customer service manager will come to you very soon'.format(str(issue))
             except ValueError:
                 return 'Unable to predict issue'
 
 if __name__ == '__main__':
-    with open('/Users/hengyuai/Documents/QMSS_1/PD/Customer-Issue-Prediction/src/pipeline.pkl', 'rb') as file:
+    with open('/Users/hengyuai/Documents/QMSS_1/PD/Customer-Issue_prediction/pipeline.pkl', 'rb') as file:
         model = dill.load(file)
     app.run_server(debug=True)
