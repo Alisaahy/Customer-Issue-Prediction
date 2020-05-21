@@ -52,7 +52,7 @@ This repository consists of 5 main components:
 
 ## Aplication
 
-You can run the `dash` application locally by downloading the [model pickle file](      ) and using the following command in your terminal:
+You can run the `dash` application locally by downloading the [dash app code](https://github.com/Alisaahy/Customer-Issue-Prediction/blob/master/dash_app.py) and the [model pickle file](https://github.com/Alisaahy/Customer-Issue-Prediction/blob/master/src/pipeline.pkl.zip) and using the following command in your terminal:
 
 ```
 python dash_app.py
