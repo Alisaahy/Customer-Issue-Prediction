@@ -5,10 +5,10 @@ An end to end app to predict what issue customers have been faced with by analyz
 ## App Overvie
 
 ```diff
-* The app works like:
+- The app works like:
 ```
 
-![](App-Overview.gif)
+![](App_overview.gif)
 
 The customer can type in their complaints and select what product they use and what state are they come from, and then we can predict what issue those customers have been faced with. Based on this prediction, we can assign a customer service manager who are responsible for the corresponding issue for this case. In this way, this app can largely help improve customer satisfaction, and reduce labor force cost for screening customer complaints manually.
 
