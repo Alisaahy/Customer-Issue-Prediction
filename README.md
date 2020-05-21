@@ -28,7 +28,7 @@ This repository consists of 5 main components:
 
 [Text classification model](https://github.com/Alisaahy/Customer-Issue-Prediction/blob/master/Text_Classification_Prediction.ipynb): This part include text cleaning, sentiment analysis and pipeline development. I trained the machine learning model on data including both text features (customer analysis), and non-text features (product, state and sentiment score) and used it to predict customer issues.
 
-[Dash application](https://github.com/Alisaahy/Customer-Issue-Prediction/blob/master/dash_app.py): Build an end to end app with Dash.
+[Dash application](https://github.com/Alisaahy/Customer-Issue-Prediction/blob/master/dash_app.py): Model deployment code, building an end to end app with Dash.
 
 
 ## Methods Used
