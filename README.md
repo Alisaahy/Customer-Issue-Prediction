@@ -2,7 +2,7 @@
 
 An end to end app to predict what issue customers have been faced with by analyzing customer complaints.
 
-## App Overvie
+## App Overview
 
 ```diff
 - The app works like:
